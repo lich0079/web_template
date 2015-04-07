@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lich0079.dao.UserDAO">
+
+	<sql id="allmenbers">
+		userId,
+		userName,
+		password,
+		userRole
+	</sql>
+
+	<sql id="menberEcpId">
+		userName,
+		password,
+		userRole
+	</sql>
+
+	<insert id="insertUser" parameterType="User" keyProperty="userId" >
+		insert into cp_user(
+		userName,
+		password,
+		userRole)
+		values
+		(
+		#{userName},
+		#{password},
+		#{userRole})
+	</insert>
+	
+	<select id="login" parameterType="User"  resultType="User">	
+		select * from cp_user where userName=#{userName} and password=#{password}
+	</select>
+
+	<select id="findUsers" resultType="map">
+		select * from cp_user;
+	</select>
+
+</mapper>
