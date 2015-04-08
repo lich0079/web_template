@@ -42,6 +42,15 @@ public class MongoDB {
         // get a handle to the "test" collection
         MongoCollection<Document> collection = database.getCollection("test");
 
+        
+        MongoCursor<Document> cursorUser = mongoClient.getDatabase("user").getCollection("cp_user").find().skip(1).limit(2).iterator();
+        try {
+            while (cursorUser.hasNext()) {
+                System.out.println(cursorUser.next().toJson());
+            }
+        } finally {
+        	cursorUser.close();
+        }
         // drop all the data in it
         collection.drop();
 
