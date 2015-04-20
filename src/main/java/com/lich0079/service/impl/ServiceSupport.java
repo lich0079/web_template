@@ -1,7 +1,6 @@
 package com.lich0079.service.impl;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.lich0079.dao.UserDAO;
@@ -13,7 +12,8 @@ import com.lich0079.util.BaseLogAble;
  */
 @ComponentScan(basePackages="com.lich0079.dao")
 public class ServiceSupport extends BaseLogAble{
- 	@Resource(name="userDAOMongoDBImpl")
+// 	@Resource(name="userDAOMongoDBImpl")// uncomment this to use mongodb
+	@Autowired
 	protected UserDAO userDAO;
 
 }
