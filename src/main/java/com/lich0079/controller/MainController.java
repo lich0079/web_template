@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.http.HttpEntity;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.lich0079.entity.User;
+import com.lich0079.service.AService;
 import com.lich0079.service.UserService;
 import com.lich0079.util.BaseLogAble;
 
@@ -32,6 +34,9 @@ public class MainController extends BaseLogAble  implements ApplicationContextAw
 	private static ApplicationContext context;
 	
 	@Autowired
+	private AService service;
+	
+	@Autowired
     public void setApplicationContext(ApplicationContext arg0) throws BeansException {
 	    context = arg0;
         
@@ -42,8 +47,7 @@ public class MainController extends BaseLogAble  implements ApplicationContextAw
 		log("index");
 		return "index";
 	}
-
-
+	
 	@RequestMapping(method = RequestMethod.POST, value = "login")
 	public String login(@RequestParam("userName") String userName,
 						@RequestParam("password") String password, HttpSession session) {
@@ -62,7 +66,7 @@ public class MainController extends BaseLogAble  implements ApplicationContextAw
 		int page = Integer.parseInt(pageNum); //
 		int pageSize = 7; //
 		List users = getUserList(pageSize, page);
-
+		service.getEmployeeData("xxx");
 		return new ModelAndView("home", "users", users);
 
 	}
